@@ -57,7 +57,15 @@ describe "User pages" do
 
   describe "signup" do
 
-    before { visit signup_path }
+    # before { visit signup_path }
+
+    # before do
+    #    sign_in  user
+    #    visit users_path
+    # end
+
+    it { should have_selector('title', text: 'All users') }
+    it { should have_selector('h1',    text: 'All users') }
 
     let(:submit) { "Create my account" }
 
