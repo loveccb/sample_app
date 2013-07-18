@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
   def new
     if signed_in? #signed in users should be redirected to user
@@ -48,6 +49,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+<<<<<<< HEAD
     if !current_user.admin?
       User.find(params[:id]).destroy   
       flash[:success] = "User destroyed."
@@ -55,16 +57,14 @@ class UsersController < ApplicationController
     else 
       redirect_to users_url, notice: "Can't delete an admin."
     end
+=======
+    User.find(params[:id]).destroy
+    flash[:success] = "User destroyed."
+    redirect_to users_url
+>>>>>>> user-microposts
   end
 
-  private
-
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
+  private   
 
     def correct_user
       @user = User.find(params[:id])
